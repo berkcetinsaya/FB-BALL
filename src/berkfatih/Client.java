@@ -64,7 +64,7 @@ public class Client extends JFrame {
 		});
 	}
 	private void connectToServer() throws IOException {
-		displayMessage("Attempting for connection\n");
+		displayMessage("\nAttempting for connection\n");
 		client = new Socket(InetAddress.getByName(chatServer), 7777);
 		displayMessage("\nConnection to " + client.getInetAddress().getHostName());
 	}
@@ -90,7 +90,7 @@ public class Client extends JFrame {
 		input = new ObjectInputStream(client.getInputStream());
 		displayMessage("\nGot I/O streams\n");
 	}
-		private void closeConnection() {
+	private void closeConnection() {
 		displayMessage("\nTerminated");
 		setTextFieldEditable(false);
 		try {

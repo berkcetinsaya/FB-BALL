@@ -8,7 +8,7 @@ public class Player2 {
 	// FIELDS
 	public int x;
 	public int y;
-	private int w = 100;
+	public int w = 100;
 	private int h = 10;
 	
 	private int r = 50;

@@ -51,7 +51,7 @@ public class Entrance extends JFrame implements ActionListener {
 		super("FB-BALL");
 
 		GamePanel.s4.start();
-		image = new ImageIcon("../../res/eric.png");
+		image = new ImageIcon("./res/eric.png");
 
 		b = new BorderLayout();
 		setLayout(b);
@@ -151,7 +151,7 @@ public class Entrance extends JFrame implements ActionListener {
 	public void multiplayer() {
 		this.setVisible(false);
 
-		framem.setSize(350, 100);
+		framem.setSize(350, 150);
 		framem.setLocationRelativeTo(null);
 		framem.setResizable(false);
 		framem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -248,7 +248,7 @@ public class Entrance extends JFrame implements ActionListener {
 
 	public void singleplayer() {
 		this.setVisible(false);
-		frames.setSize(300, 80);
+		frames.setSize(300, 150);
 		frames.setLocationRelativeTo(null);
 		frames.setResizable(false);
 		frames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
