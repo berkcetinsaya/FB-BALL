@@ -51,7 +51,7 @@ public class Entrance extends JFrame implements ActionListener {
 		super("FB-BALL");
 
 		GamePanel.s4.start();
-		image = new ImageIcon("eric.png");
+		image = new ImageIcon("../../res/eric.png");
 
 		b = new BorderLayout();
 		setLayout(b);
