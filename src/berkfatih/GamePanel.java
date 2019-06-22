@@ -19,8 +19,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	private static final long serialVersionUID = 1L;
 
 	// FIELDS
-	public static int WIDTH = 530;
-	public static int HEIGHT = 530;
+	public static int WIDTH = 560;
+	public static int HEIGHT = 560;
 
 	private Thread thread;
 	private boolean running;
@@ -67,22 +67,22 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	public static Server sv;
 	public static Client cl;
 
-	static Sound s1 = new Sound(new File("../../res/arctic_monkey.wav"));
-	static Sound s2 = new Sound(new File("../../res/applause.wav"));
-	static Sound s3 = new Sound(new File("../../res/win.wav"));
-	static Sound s4 = new Sound(new File("../../res/ea.wav"));
-	static Sound s5 = new Sound(new File("../../res/break.wav"));
-	static Sound s6 = new Sound(new File("../../res/player_ball.wav"));
-	static Sound s7 = new Sound(new File("../../res/ball_enemy.wav"));
-	static Sound s8 = new Sound(new File("../../res/dead.wav"));
-	static Sound s9 = new Sound(new File("../../res/heal.wav"));
-	static Sound s10 = new Sound(new File("../../res/lose_life.wav"));
-	static Sound s11 = new Sound(new File("../../res/fire_in_the_hole.wav"));
-	static Sound s12 = new Sound(new File("../../res/sparta.wav"));
-	static Sound s13 = new Sound(new File("../../res/fast.wav"));
-	static Sound s14 = new Sound(new File("../../res/skype.wav"));
-	static Sound s15 = new Sound(new File("../../res/trol.wav"));
-	static Sound s16 = new Sound(new File("../../res/monsterkill.wav"));
+	static Sound s1 = new Sound(new File("./res/arctic_monkey.wav"));
+	static Sound s2 = new Sound(new File("./res/applause.wav"));
+	static Sound s3 = new Sound(new File("./res/win.wav"));
+	static Sound s4 = new Sound(new File("./res/ea.wav"));
+	static Sound s5 = new Sound(new File("./res/break.wav"));
+	static Sound s6 = new Sound(new File("./res/player_ball.wav"));
+	static Sound s7 = new Sound(new File("./res/ball_enemy.wav"));
+	static Sound s8 = new Sound(new File("./res/dead.wav"));
+	static Sound s9 = new Sound(new File("./res/heal.wav"));
+	static Sound s10 = new Sound(new File("./res/lose_life.wav"));
+	static Sound s11 = new Sound(new File("./res/fire_in_the_hole.wav"));
+	static Sound s12 = new Sound(new File("./res/sparta.wav"));
+	static Sound s13 = new Sound(new File("./res/fast.wav"));
+	static Sound s14 = new Sound(new File("./res/skype.wav"));
+	static Sound s15 = new Sound(new File("./res/trol.wav"));
+	static Sound s16 = new Sound(new File("./res/monsterkill.wav"));
 
 	// CONSTRUCTOR
 	public GamePanel() {
@@ -111,6 +111,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		try {
 			out.writeInt(player.x);
 			player2.x = in.readInt();
+
+			out.writeInt(player.w);
+			player2.w = in.readInt();
+
 		}
 		catch (IOException e) {
 			e.printStackTrace();
