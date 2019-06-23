@@ -126,11 +126,17 @@ public class Entrance extends JFrame implements ActionListener {
 		}
 		else if (e.getSource() == high) {
 			Runtime rt = Runtime.getRuntime();
-			String url = "localhost";
+			String url = "Scores.txt";
+			String os = System.getProperty("os.name").toLowerCase();
 			int ss = JOptionPane.showConfirmDialog(south, "You will redirect to our web server?", "High Score", JOptionPane.YES_NO_OPTION);
 			if (ss == JOptionPane.YES_OPTION) {
 				try {
-					rt.exec("rundll32 url.dll,FileProtocolHandler " + url);
+					if (os.indexOf( "win" ) >= 0) {
+				        rt.exec( "rundll32 url.dll,FileProtocolHandler " + url);
+
+				    } else if (os.indexOf( "mac" ) >= 0) {
+				    	 rt.exec( "open " + url);
+				    }
 				}
 				catch (IOException e1) {
 					e1.printStackTrace();
