@@ -29,6 +29,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	private Graphics2D g;
 
 	private int FPS = 60;
+	private double averageFPS;
+
 
 	public static Player player;
 	public static Player2 player2;
@@ -132,7 +134,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		if (socket != null) {
 			multi = true;
 			Game.game.setVisible(true);
-			JOptionPane.showMessageDialog(Entrance.frames, "Play/Pause: P\nExit: Esc\nYou can play by arrows or mouse\nFire:Space\nPowerups are misteries :)");
+			JOptionPane.showMessageDialog(Entrance.frames, "Play/Pause: P\nExit: Esc\nYou can play by arrows or mouse\nFire: Space\nPowerups are misteries :)");
 		}
 	}
 	public static void Client(String IP) throws Exception, SecurityException {
@@ -140,8 +142,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		in = new DataInputStream(socket.getInputStream());
 		out = new DataOutputStream(socket.getOutputStream());
 		if (socket != null) {
+			multi = true;
 			Game.game.setVisible(true);
-			JOptionPane.showMessageDialog(Entrance.frames, "Play/Pause: P\nExit: Esc\nYou can play by arrows or mouse\nFire:Space\nPowerups are misteries :)");
+			JOptionPane.showMessageDialog(Entrance.frames, "Play/Pause: P\nExit: Esc\nYou can play by arrows or mouse\nFire: Space\nPowerups are misteries :)");
 		}
 	}
 
@@ -177,6 +180,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
 		int frameCount = 0;
 		int maxFrameCount = 60;
+		
 
 		long targetTime = 1000 / FPS;
 
@@ -210,6 +214,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 			totalTime += System.nanoTime() - startTime;
 			frameCount++;
 			if (frameCount == maxFrameCount) {
+				averageFPS = 1000.0/((totalTime / frameCount)/1000000);
 				frameCount = 0;
 				totalTime = 0;
 			}
@@ -559,13 +564,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 				// powerups
 				double rand = Math.random();
 				if (rand < 0.020) powerups.add(new PowerUp(1, e.getx() + 10, e.gety() + 10)); // life
-				else if (rand < 0.080) powerups.add(new PowerUp(2, e.getx() + 10, e.gety() + 10)); // lose
-				else if (rand < 0.140) powerups.add(new PowerUp(3, e.getx() + 10, e.gety() + 10)); // fire
-				else if (rand < 0.200) powerups.add(new PowerUp(4, e.getx() + 10, e.gety() + 10)); // slow
-				else if (rand < 0.260) powerups.add(new PowerUp(5, e.getx() + 10, e.gety() + 10)); // speed
-				else if (rand < 0.320) powerups.add(new PowerUp(6, e.getx() + 10, e.gety() + 10)); // width+
-				else if (rand < 0.380) powerups.add(new PowerUp(7, e.getx() + 10, e.gety() + 10)); // width-
-				else if (rand < 0.440) powerups.add(new PowerUp(8, e.getx() + 10, e.gety() + 10)); // icinden gecmek
+				else if (rand < 0.110) powerups.add(new PowerUp(2, e.getx() + 10, e.gety() + 10)); // lose
+				else if (rand < 0.120) powerups.add(new PowerUp(3, e.getx() + 10, e.gety() + 10)); // fire
+				else if (rand < 0.130) powerups.add(new PowerUp(4, e.getx() + 10, e.gety() + 10)); // slow
+				else if (rand < 0.140) powerups.add(new PowerUp(5, e.getx() + 10, e.gety() + 10)); // speed
+				else if (rand < 0.150) powerups.add(new PowerUp(6, e.getx() + 10, e.gety() + 10)); // width+
+				else if (rand < 0.160) powerups.add(new PowerUp(7, e.getx() + 10, e.gety() + 10)); // width-
+				else if (rand < 0.170) powerups.add(new PowerUp(8, e.getx() + 10, e.gety() + 10)); // icinden gecmek
 
 				player.addScore(e.getRank() * 10 + e.getType() * 10);
 				enemies.remove(i);
@@ -590,6 +595,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 			g.setColor(new Color(255, 255, 255, 64));
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 		}
+				
 
 		// draw speedup screen
 		if (speedUpTimer != 0) {
@@ -628,6 +634,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		if (levelStartTimer != 0) {
 			if (!godMode) {
 				player.setFireFlag(false);
+				icindenGecmek = false;
+				player.w = 100;
 			}
 			player.setFiring(false);
 			powerups.clear();
@@ -635,9 +643,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 			balls.clear();
 			slowDownTimer = 0;
 			speedUpTimer = 0;
-			if (!godMode) {
-				icindenGecmek = false;
-			}
 			if (levelNumber != 6) {
 				g.setFont(new Font("Arial", Font.PLAIN, 18));
 				String s = "-  L E V E L   " + levelNumber + "  -";
@@ -743,19 +748,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		}
 		if (keyCode == KeyEvent.VK_F) {
 			if (godMode) {
-				player.setFiring(true);
-			}
-		}
-		if (keyCode == KeyEvent.VK_F && ((arg0.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
-			if (godMode) {
-				player.setFiring(false);
+				if(!player.getFiring())
+					player.setFiring(true);
+				else
+					player.setFiring(false);
 			}
 		}
 		if (keyCode == KeyEvent.VK_G) {
 			if (godMode) {
 				godMode = false;
 				player.setFiring(false);
-				player.fireFlag = false;
+				player.setFireFlag(false);
 				icindenGecmek = false;
 				player.w = 100;
 				s15.stop();
@@ -763,10 +766,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 			else {
 				s15.start();
 				godMode = true;
-				player.fireFlag = true;
+				player.setFireFlag(true);
 				icindenGecmek = true;
-				player.lives = 99;
-				player.addScore(99999999);
+				player.lives = 5;
 				player.w = 200;
 			}
 		}

@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class ChatThread extends Thread {
 	
-	public static String choice = JOptionPane.showInputDialog("Create new Game or Join via IP?(create/join)");
+	public static String choice = JOptionPane.showInputDialog("Create a new chat connection or Join via IP?(create/join)");
 	public static Server sv;
 	public static Client cl;
 
@@ -37,7 +37,7 @@ public class ChatThread extends Thread {
 				break;
 			}
 			else {
-				choice = JOptionPane.showInputDialog("That is not a valid option.\nCreate new Game or Join via IP?(create/join)");
+				choice = JOptionPane.showInputDialog("That is not a valid option.\nCreate a new chat connection or Join via IP?(create/join)");
 			}
 		}
 	}

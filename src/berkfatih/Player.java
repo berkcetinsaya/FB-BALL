@@ -104,7 +104,10 @@ public class Player {
 	public void setFiring(boolean b) {
 		firing = b;
 	}
-
+	public boolean getFiring() {
+		
+		return firing;
+	}
 	public void setFireFlag(boolean b) {
 		fireFlag = b;
 	}

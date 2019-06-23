@@ -65,7 +65,7 @@ public class Client extends JFrame {
 	}
 	private void connectToServer() throws IOException {
 		displayMessage("\nAttempting for connection\n");
-		client = new Socket(InetAddress.getByName(chatServer), 7777);
+		client = new Socket(InetAddress.getByName(chatServer), 7776);
 		displayMessage("\nConnection to " + client.getInetAddress().getHostName());
 	}
 	public void runClient() {

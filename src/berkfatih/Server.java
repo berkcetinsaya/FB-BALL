@@ -11,7 +11,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -46,8 +45,8 @@ public class Server extends JFrame {
 	}
 	public void runServer() {
 		try {
-			server = new ServerSocket(7777);
-			while (true) {
+			server = new ServerSocket(7776);
+			//while (true) {
 				try {
 					waitForConnection();
 					getStream();
@@ -60,7 +59,7 @@ public class Server extends JFrame {
 					closeConnection();
 					++counter;
 				}
-			}
+			//}
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -108,7 +107,7 @@ public class Server extends JFrame {
 		} while (!message.equals("CLIENT>>> TERMINATE"));
 	}
 	private void closeConnection() {
-		displayMessage("\nTerminated");
+		displayMessage("\nTerminated\n");
 		setTextFieldEditable(false);
 		try {
 			output.close();
