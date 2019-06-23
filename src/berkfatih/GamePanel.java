@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	private BufferedImage image;
 	private Graphics2D g;
 
-	private int FPS = 59;
+	private int FPS = 60;
 
 	public static Player player;
 	public static Player2 player2;
@@ -84,6 +84,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	static Sound s15 = new Sound(new File("./res/trol.wav"));
 	static Sound s16 = new Sound(new File("./res/monsterkill.wav"));
 
+	private static boolean multi =false;
+
 	// CONSTRUCTOR
 	public GamePanel() {
 		super();
@@ -128,6 +130,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		in = new DataInputStream(socket.getInputStream());
 		out = new DataOutputStream(socket.getOutputStream());
 		if (socket != null) {
+			multi = true;
 			Game.game.setVisible(true);
 			JOptionPane.showMessageDialog(Entrance.frames, "Play/Pause: P\nExit: Esc\nYou can play by arrows or mouse\nFire:Space\nPowerups are misteries :)");
 		}
@@ -173,7 +176,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		long totalTime = 0;
 
 		int frameCount = 0;
-		int maxFrameCount = 30;
+		int maxFrameCount = 60;
 
 		long targetTime = 1000 / FPS;
 
@@ -595,7 +598,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		}
 		// draw player
 		player.draw(g);
-		player2.draw(g);
+		if(multi)
+			player2.draw(g);
 
 		// draw bullet
 		for (int i = 0; i < bullets.size(); i++) {
